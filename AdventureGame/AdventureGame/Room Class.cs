@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace AdventureGame
 {
+    //Creates Room Class
     class Room_Class
     {
-
+        
     }
 }
