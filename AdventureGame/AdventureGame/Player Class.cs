@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace AdventureGame
 {
+    //Creates Player Class
     class Player
     {
+        //Basic information for Player with default values.
         public string name;
         public int health = 100;
         public int attack = 10;
