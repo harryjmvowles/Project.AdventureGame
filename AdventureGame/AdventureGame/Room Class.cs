@@ -17,6 +17,7 @@ namespace AdventureGame
         public bool BeenHere = false;
         public Dictionary<string, string> PointsOfInterest { get; set; }
         public Dictionary<string, string> Exits { get; set; }
+        public Door RoomDoor { get; set; }
 
         //Used to create rooms with basic variables.
         public Room(string name, string description, List<string> items = null, Door door = null)
@@ -25,6 +26,7 @@ namespace AdventureGame
             Description = description;
             Items = items ?? new List<string>();
             PointsOfInterest = new Dictionary<string, string>();
+            Exits = new Dictionary<string, string>();
             RoomDoor = door ?? new Door();
             BeenHere = false;
         }
@@ -52,7 +54,6 @@ namespace AdventureGame
                 Console.WriteLine(Description);
                 DisplayItems();
                 DisplayPointsOfInterest();
-
 
                 //The player has now been in this room
                 BeenHere = true;
@@ -137,6 +138,34 @@ namespace AdventureGame
                         break;
                 }
             } while (command != "5");  //Exit the room loop when the player chooses to leave
-
         }
+
+        //Interact with points of interest (stub for interaction logic)
+        private void InteractWithPointOfInterest(string poi)
+        {
+            if (PointsOfInterest.ContainsKey(poi))
+            {
+                Console.WriteLine($"You interact with the {poi}. {PointsOfInterest[poi]}");
+            }
+            else
+            {
+                Console.WriteLine("That point of interest doesn't exist in this room.");
+            }
+        }
+
+        //Pick up an item from the room
+        private void PickUpItem(string item, Player currentPlayer)
+        {
+            if (Items.Contains(item))
+            {
+                Console.WriteLine($"You pick up the {item}.");
+                Items.Remove(item);
+                currentPlayer.AddToInventory(item); 
+            }
+            else
+            {
+                Console.WriteLine("That item is not in the room.");
+            }
+        }
+    }
 
