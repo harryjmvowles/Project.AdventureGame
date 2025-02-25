@@ -8,7 +8,6 @@ namespace AdventureGame
 {
     //Creates Room Class
     public class Room
-        
     {
         //variables for Room Class
         public string Name { get; set; }
@@ -160,7 +159,7 @@ namespace AdventureGame
             {
                 Console.WriteLine($"You pick up the {item}.");
                 Items.Remove(item);
-                currentPlayer.AddToInventory(item); 
+                currentPlayer.AddToInventory(item);
             }
             else
             {
@@ -168,4 +167,4 @@ namespace AdventureGame
             }
         }
     }
-
+}

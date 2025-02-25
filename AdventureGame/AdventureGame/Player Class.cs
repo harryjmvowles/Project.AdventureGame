@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AdventureGame
 {
     //Creates Player Class
-    class Player
+    public class Player
     {
         //Basic information for Player with default values.
         public string name;
@@ -21,6 +21,11 @@ namespace AdventureGame
         public int experience = 0;
         public int experienceToNextLevel = 100;
         public List<string> Inventory { get; set; }
+
+        public Player()
+        {
+            Inventory = new List<string>();
+        }
 
         //view player's inventory
         public void ViewInventory()
