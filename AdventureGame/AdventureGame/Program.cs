@@ -49,7 +49,8 @@ namespace AdventureGame
             Console.WriteLine("You are now trapped in The Dungeon.... How will you escape?");
             Console.WriteLine("Press Any Key to continue....");
             Console.ReadKey();
-            Console.Clear()
+            Console.Clear();
+
 
 
         }
