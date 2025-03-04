@@ -51,6 +51,21 @@ namespace AdventureGame
             Console.ReadKey();
             Console.Clear();
 
+            //Initialize RoomManager to access predefined rooms
+            RoomManager roomManager = new RoomManager();
+
+            //Retrieve the 'Lost Hall' room from the RoomManager
+            Room lostHall = roomManager.GetRoom("The Lost Hall");
+
+            //Now let the player enter the Lost Hall room
+            if (lostHall != null)
+            {
+                lostHall.Enter();
+            }
+            else
+            {
+                Console.WriteLine("The Lost Hall room could not be found.");
+            }
 
 
         }
