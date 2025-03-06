@@ -30,11 +30,20 @@ namespace AdventureGame
         //view player's inventory
         public void ViewInventory()
         {
+            Console.WriteLine("Player Information:");
+            Console.WriteLine("Name: " + name);
+            Console.WriteLine("Health: " + health);
+            Console.WriteLine("Gold: " + gold);
+            Console.WriteLine("Potions: " + potions);
+            Console.WriteLine("Player Level: " + level);
+            Console.WriteLine("");
             Console.WriteLine("Your Inventory:");
             foreach (string item in Inventory)
             {
                 Console.WriteLine("- " + item);
             }
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
         }
 
         //Add item to player's inventory

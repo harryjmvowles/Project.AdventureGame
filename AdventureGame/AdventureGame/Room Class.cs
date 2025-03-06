@@ -50,7 +50,7 @@ namespace AdventureGame
             if (!BeenHere)
             {
                 //Display the room details
-                Console.WriteLine("You enter a new room... it is clearly the " + Name);
+                Console.WriteLine("You enter a new room... it is clearly " + Name);
                 Console.WriteLine(Description);
                 DisplayItems();
                 DisplayPointsOfInterest();
@@ -77,13 +77,32 @@ namespace AdventureGame
         //Display the items in the room
         public void DisplayItems()
         {
-            if (Items.Count > 0)
+            //Check if there is exactly one item in the list
+            if (Items.Count == 1)
+            {
+                //If that item is empty, display "Items: N/A"
+                if (string.IsNullOrEmpty(Items[0]))
+                {
+                    Console.WriteLine("Items: N/A");
+                }
+                else
+                {
+                    Console.WriteLine("Item in the room: " + Items[0]);
+                }
+            }
+            //If there are more than one item
+            else if (Items.Count > 1)
             {
                 Console.WriteLine("Items in the room:");
                 foreach (string item in Items)
                 {
                     Console.WriteLine("- " + item);
                 }
+            }
+            //If there are no items in the room
+            else
+            {
+                Console.WriteLine("No items in the room.");
             }
         }
 
@@ -106,13 +125,14 @@ namespace AdventureGame
             string command;
             do
             {
-                //Show available actions
+                //Show available actions + reshow description
                 Console.WriteLine("\nWhat would you like to do?");
-                Console.WriteLine("1. View inventory");
-                Console.WriteLine("2. Interact with a point of interest");
-                Console.WriteLine("3. Pick up an item");
-                Console.WriteLine("4. Go to the door");
-                Console.WriteLine("5. Exit the room");
+                Console.WriteLine("1. View Room description again");
+                Console.WriteLine("2. View inventory/Health Status");
+                Console.WriteLine("3. Interact with a point of interest");
+                Console.WriteLine("4. Pick up an item");
+                Console.WriteLine("5. Go to the door");
+                Console.WriteLine("6. Exit the room");
 
                 //Read player input
                 command = Console.ReadLine();
@@ -120,10 +140,18 @@ namespace AdventureGame
                 switch (command)
                 {
                     case "1":
+                        Console.Clear();
+                        Console.WriteLine(Description);  //Show room description
+                        DisplayItems();
+                        DisplayPointsOfInterest();
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                    case "2":
                         currentPlayer.ViewInventory();  //Show inventory
                         Console.Clear();
                         break;
-                    case "2":
+                    case "3":
                         Console.Clear();
                         DisplayPointsOfInterest();
                         Console.WriteLine("Which point of interest would you like to interact with?");
@@ -132,22 +160,22 @@ namespace AdventureGame
                         Console.ReadKey();
                         Console.Clear();
                         break;
-                    case "3":
+                    case "4":
                         Console.WriteLine("Which item would you like to pick up?");
                         string item = Console.ReadLine();
                         PickUpItem(item, currentPlayer);  //Pick up an item
                         break;
-                    case "4":
-                        RoomDoor.CheckDoorStatus();  //Check door status (locked/unlocked)
-                        break;
                     case "5":
-                        Console.WriteLine("Exiting the room...");
+                        Console.WriteLine("This feature has not been added yet.");  //Check door status (locked/unlocked) Not Implemented yet!
+                        break;
+                    case "6":
+                        Console.WriteLine("This feature has not been added yet."); //Exit the room Not Implemented yet!
                         break;
                     default:
                         Console.WriteLine("Invalid command. Please try again.");
                         break;
                 }
-            } while (command != "5");  //Exit the room loop when the player chooses to leave
+            } while (command != "6");  //Exit the room loop when the player chooses to leave
         }
 
         //Interact with points of interest
@@ -194,10 +222,14 @@ namespace AdventureGame
         {
             if (Items.Contains(item))
             {
-                Console.WriteLine($"You pick up the {item}.");
-                Items.Remove(item);
-                currentPlayer.AddToInventory(item);
+                if (item == "")
+                    Console.WriteLine("That item does not Exist.");
+                else
+                    Console.WriteLine($"You pick up the {item}.");
+                    Items.Remove(item);
+                    currentPlayer.AddToInventory(item);
             }
+
             else
             {
                 Console.WriteLine("That item is not in the room.");
